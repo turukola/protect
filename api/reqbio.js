@@ -13,7 +13,9 @@ export default async function handler(req, res) {
     const response = await fetch(`https://www.instagram.com/api/v1/users/web_profile_info/?username=${username}`, {
       headers: {
         "User-Agent": iphone_ua,
-        "x-ig-app-id": "936619743392459"
+        "x-ig-app-id": "936619743392459",
+        "x-asbd-id": "359341",
+        "x-csrftoken": "99fHK0D6j-CPjLRWkpxZ9O"
       }
     });
 
