@@ -8,7 +8,7 @@
   ],
   "routes": [
     {
-      "src": "/api/api",
+      "src": "/api/reqbio",
       "dest": "api/reqbio.js"
     }
   ]
