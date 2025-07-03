@@ -12,6 +12,7 @@ export default async function handler(req, res) {
   try {
     const response = await fetch(`https://www.instagram.com/api/v1/users/web_profile_info/?username=${username}`, {
       headers: {
+        "User-Agent": iphone_ua,
         "x-ig-app-id": "936619743392459"
       }
     });
