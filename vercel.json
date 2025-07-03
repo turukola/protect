@@ -1,15 +1,9 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "api/reqbio.js",
-      "use": "@vercel/node"
-    }
+    { "src": "api/key.js", "use": "@vercel/node" }
   ],
   "routes": [
-    {
-      "src": "/api/reqbio",
-      "dest": "api/reqbio.js"
-    }
+    { "src": "/api/key", "dest": "api/key.js" }
   ]
 }
