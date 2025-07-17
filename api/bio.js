@@ -13,7 +13,6 @@ export default async function handler(req, res) {
     const match = html.match(/"biography":"(.*?)"/);
     const raw = match ? match[1] : null;
 
-    // decode unicode escape (contoh \u003C jadi <)
     const bio = raw ? JSON.parse(`"${raw}"`) : null;
 
     res.setHeader("Access-Control-Allow-Origin", "*");
