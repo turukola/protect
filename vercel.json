@@ -1,9 +1,11 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/key.js", "use": "@vercel/node" }
+    { "src": "api/key.js", "use": "@vercel/node" },
+    { "src": "api/bio.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/key", "dest": "api/key.js" }
+    { "src": "/api/key", "dest": "api/key.js" },
+    { "src": "/api/bio", "dest": "api/bio.js" }
   ]
 }
