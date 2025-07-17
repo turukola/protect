@@ -3,14 +3,18 @@ export default async function handler(req, res) {
   if (!username) return res.status(400).json({ error: "username missing" });
 
   try {
-    const igRes = await fetch(`https://www.instagram.com/${username}/?__a=1&__d=dis`, {
+    const igRes = await fetch(`https://www.instagram.com/${username}/`, {
       headers: {
         "User-Agent": "Mozilla/5.0"
       }
     });
 
-    const data = await igRes.json();
-    const bio = data?.graphql?.user?.biography || null;
+    const html = await igRes.text();
+    const match = html.match(/"biography":"(.*?)"/);
+    const raw = match ? match[1] : null;
+
+    // decode unicode escape (contoh \u003C jadi <)
+    const bio = raw ? JSON.parse(`"${raw}"`) : null;
 
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.status(200).json({ bio });
