@@ -11,13 +11,17 @@ export default async function handler(req, res) {
 
     const html = await igRes.text();
 
-    const ldJsonMatch = html.match(/<script type="application\/ld\+json">(.+?)<\/script>/);
-    if (!ldJsonMatch) {
+    const match = html.match(/<script type="application\/json" id="__NEXT_DATA__">(.+?)<\/script>/);
+    if (!match) {
       return res.status(200).json({ bio: null });
     }
 
-    const ldJson = JSON.parse(ldJsonMatch[1]);
-    const bio = ldJson?.description?.trim() || null;
+    const json = JSON.parse(match[1]);
+
+    const bio =
+      json?.props?.pageProps?.graphql?.user?.biography?.trim() ||
+      json?.props?.pageProps?.profilePage?.[0]?.graphql?.user?.biography?.trim() ||
+      null;
 
     res.setHeader("Access-Control-Allow-Origin", "*");
     return res.status(200).json({ bio });
