@@ -10,14 +10,14 @@ export default async function handler(req, res) {
     });
 
     const html = await igRes.text();
-    const match = html.match(/"biography":"(.*?)"/);
-    const raw = match ? match[1] : null;
 
-    const bio = raw ? JSON.parse(`"${raw}"`) : null;
+    // Ambil bio dari elemen <span dir="auto">...</span>
+    const match = html.match(/<span class="[^"]*" dir="auto">([^<]*)<\/span>/);
+    const bio = match ? match[1].trim() : null;
 
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.status(200).json({ bio });
+    return res.status(200).json({ bio });
   } catch (err) {
-    res.status(500).json({ error: "Failed to fetch bio", details: err.message });
+    return res.status(500).json({ error: "Failed to fetch bio", details: err.message });
   }
 }
