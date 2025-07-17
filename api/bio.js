@@ -6,7 +6,8 @@ export default async function handler(req, res) {
     const igRes = await fetch(`https://www.instagram.com/api/v1/users/web_profile_info/?username=${username}`, {
       headers: {
         "User-Agent": "Instagram 155.0.0.37.107 Android",
-        "x-ig-app-id": "936619743392459"
+        "x-ig-app-id": "936619743392459",
+        "Accept": "application/json"
       }
     });
 
