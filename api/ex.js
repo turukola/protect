@@ -22,7 +22,9 @@ export default async function handler(req, res) {
     }
 
     const json = await response.json();
-    return res.status(200).json({ ex: json.result });
+    const list = JSON.parse(json.result);
+
+    return res.status(200).json({ keys: list });
   } catch (err) {
     return res.status(500).json({ error: "Server error" });
   }
